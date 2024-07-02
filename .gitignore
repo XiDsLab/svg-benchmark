@@ -1,0 +1,17 @@
+/2_PBMC3K/figures
+/2_PBMC3K/results/pbmc3k.rds
+/3_IFNB/results/ifnb_ctrl.rds
+/3_IFNB/results/ifnb_stim.rds
+/3_IFNB/figures
+/4_Zheng2017/*.tar.gz
+/4_Zheng2017/results/*.rds
+/4_Zheng2017/results/*_ROSeq.RData
+/4_Zheng2017/results/*_haystack*.RData
+/4_Zheng2017/figures
+/4_Zheng2017/results/old
+/5_iCCA/results/check
+/5_iCCA/figures
+/5_iCCA/iCCA_survival
+/1_Simulation/.Rhistory
+/2_PBMC3K/.Rhistory
+/3_IFNB/.Rhistory
