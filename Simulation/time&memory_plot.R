@@ -101,21 +101,6 @@ for(i in 1:5){
   }
 }
 
-# result<-c()
-# result2<-c()
-# result3<-c()
-# for(i in 1:8){
-#   for(j in 1:2){
-#     file<-paste0('D:/Data/downsampling/',spotnum[i],'/',seed[j])
-#     setwd(file)
-#     
-#     scgo<-pd$read_pickle("brainA_result_sepal.data")
-#     #result<-c(result,scgo[3])
-#     result2<-c(result2,scgo[2])
-#     result3<-c(result3,scgo[1])
-#   }
-# }
-# result2
 
 for(i in 6){
   for(j in 1){
@@ -373,8 +358,6 @@ df<-data.frame(memory=m,method=method,time_clock=t_clock,time_cpu=t_cpu,seednum=
 
 df$time_clock<-df$time_clock/60
 df$time_cpu<-df$time_cpu/60
-max(df$memory)
-df$memory[which(df$memory<0)]<-1024*50+1
 
 
 df2<-data.frame(memory=(df$memory[which(df$seednum==1)]),
@@ -391,21 +374,6 @@ myshapes <- c(22,21,24,25,21,21,23,24,22,22,23)
 names(myshapes)<-c("Binspect","spark","meringue",
                    "spatialDE","SOMDE","sparkX","sepal",
                    "scGCO","RV","dCor","HSIC")
-ggplot(df2)+
-  geom_line(aes(x=spotnum,y=time_clock,color=method),linewidth=1)+scale_color_manual(values = mycolor)+
-  
-  geom_point(aes(x=spotnum,y=time_clock,shape=method,fill=method))+ scale_shape_manual(values = myshapes)+
-  scale_x_continuous(breaks=unique(df$spotnum), labels = c('500','1000','2000','4000','8000','16k','32k','50k'))+
-  scale_y_log10()+coord_trans(x="log10")+geom_hline(yintercept=24*60, linetype='dotted', col = 'red',linewidth=0.5)+
-  annotate("text", x = 100, y = 24*60, label = "1 day", vjust = -0.5)+
-  geom_hline(yintercept=60, linetype='dotted', col = 'red')+
-  annotate("text", x = 100, y = 60, label = "1 hour", vjust = -1)+
-  geom_hline(yintercept=1, linetype='dotted', col = 'red')+
-  annotate("text", x = 100, y = 1, label = "1 min", vjust = -0.5)+
-  geom_hline(yintercept=10, linetype='dotted', col = 'red')+
-  annotate("text", x = 105, y = 10, label = "10 mins", vjust = -0.5)+labs(x='Number of cells',y='Time(min)')+
-  theme_pubr()+theme(legend.position = "top")+theme(text = element_text(size=20,hjust=0.5))
-   
 
 df3<-df2
 indx<-c(rep(c(65),each=2))
@@ -420,81 +388,14 @@ df3$spotnum<-log10(df3$spotnum)
 df3$time_cpu<-log10(df3$time_cpu)
 
 library(latex2exp)
-ggplot()+
-  geom_line(data=df3,aes(x=spotnum,y=time_clock,color=method),linewidth=1)+
-  geom_point(data=df3,aes(x=spotnum,y=time_clock,shape=method,fill=method),size=4)+
-  #geom_line(data=df5,aes(x=spotnum,y=time_clock,color=method),linewidth=1,linetype='dotted')+
-  #geom_point(data=df5,aes(x=spotnum,y=time_clock,shape=method,fill=method),size=4)+
-  scale_shape_manual(values = myshapes)+
-  scale_color_manual(values = mycolor)+
-  scale_fill_manual(values = mycolor)+
-  geom_hline(yintercept=log10(24*60), linetype='dashed', col = 'red',linewidth=0.5)+
-  annotate("text", x = log10(700), y = log10(24*60), label = "1 day", size=12,vjust = -0.5)+
-  geom_hline(yintercept=log10(60), linetype='dashed', col = 'red')+
-  annotate("text", x = log10(700), y = log10(60), label = "1 hour", size=12,vjust = -1)+
-  geom_hline(yintercept=log10(1), linetype='dashed', col = 'red')+
-  annotate("text", x = log10(32000), y = log10(1), label = "1 min", size=12,vjust = -0.5)+
-  geom_hline(yintercept=log10(10), linetype='dashed', col = 'red')+
-  annotate("text", x = log10(700), y = log10(10), label = "10 mins", size=12,vjust = -0.5)+
-  scale_x_continuous(breaks=unique(df3$spotnum), labels = c('500','1000','2000','4000','8000','16k','32k','50k'))+
-  scale_y_continuous(limits = c(-1,4),breaks = c(-1,0,1,2,3),labels = c(TeX('$10^{-1}$'),TeX('$10^{0}$'),TeX('$10^{1}$'),TeX('$10^{2}$'),TeX('$10^{3}$')))+
-  labs(x='Number of cells',y='Time(min)',color='Method',shape='Method',fill='Method')+
-  theme_pubr()+theme(legend.position = "right")+theme(text = element_text(size=40,hjust=0.5))+theme(
-    legend.key.size = unit(40, "pt")
-  )
 
-
-ggplot(df3)+
-  geom_line(aes(x=spotnum,y=time_cpu,color=method),linewidth=1)+
-  geom_point(aes(x=spotnum,y=time_cpu,shape=method,fill=method),size=3)+
-  scale_shape_manual(values = myshapes)+
-  scale_color_manual(values = mycolor)+
-  scale_fill_manual(values = mycolor)+
-  geom_hline(yintercept=log10(24*60), linetype='dashed', col = 'red',linewidth=0.5)+
-  annotate("text", x = log10(700), y = log10(24*60), label = "1 day", size=12,vjust = -0.5)+
-  geom_hline(yintercept=log10(60), linetype='dashed', col = 'red')+
-  annotate("text", x = log10(700), y = log10(60), label = "1 hour", size=12,vjust = -1)+
-  geom_hline(yintercept=log10(1), linetype='dashed', col = 'red')+
-  annotate("text", x = log10(32000), y = log10(1), label = "1 min", size=12,vjust = -0.5)+
-  geom_hline(yintercept=log10(10), linetype='dashed', col = 'red')+
-  annotate("text", x = log10(700), y = log10(10), label = "10 mins", size=12,vjust = -0.5)+
-  geom_hline(yintercept=log10(24*60*10), linetype='dotted', col = 'red',linewidth=0.5)+
-  annotate("text", x = log10(700), y = log10(24*60*10), label = "10 day",size=12, vjust = -0.5)+
-  scale_x_continuous(breaks=unique(df3$spotnum), labels = c('500','1000','2000','4000','8000','16k','32k','50k'))+
-  scale_y_continuous(limits = c(-0.5,5),breaks = c(-1,0,1,2,3),labels = c(TeX('$10^{-1}$'),TeX('$10^{0}$'),TeX('$10^{1}$'),TeX('$10^{2}$'),TeX('$10^{3}$')))+
-  labs(x='Number of cells',y='Time(min)',color='Method',shape='Method',fill='Method')+
-  theme_pubr()+theme(legend.position = "right")+theme(text = element_text(size=40,hjust=0.5))+theme(
-    legend.key.size = unit(40, "pt")
-  )
 
 df3<-df2
 
 df3$memory<-log10(df3$memory)
 df3$spotnum<-log10(df3$spotnum)
-ggplot(df3)+
-  geom_line(aes(x=spotnum,y=memory,color=method),linewidth=1)+geom_point(aes(x=spotnum,y=memory,shape=method,fill=method),size=3)+
-  scale_shape_manual(values = myshapes)+
-  scale_color_manual(values = mycolor)+
-  scale_fill_manual(values = mycolor)+
-  scale_y_continuous(breaks=c(log(1),log10(10),log10(100),log10(500),log10(1024),log10(1024*10),log10(1024*50)), labels = c('1M','10M','100M','500M','1G','10G','50G'))+
-  labs(x='Number of cells',y='Memory',color='Method',fill='Method',shape='Method')+geom_hline(yintercept=log10(1024), linetype='dashed', col = 'red')+
-  annotate("text", x = log10(700), y = log10(1024), label = "1 GB",size=12, vjust = -0.5)+
-  scale_x_continuous(breaks=unique(df3$spotnum), labels = c('500','1000','2000','4000','8000','16k','32k','50k'))+
-  theme_pubr()+theme(legend.position = "right")+theme(text = element_text(size=40,hjust=0.5))+
-  theme(
-    legend.key.size = unit(40, "pt")
-  )
 
-
-ggplot(df3)+
-  geom_line(aes(x=spotnum,y=memory,color=method))+ 
-  geom_point(aes(x=spotnum,y=memory,color=method),size=2)+coord_trans(x="log10")+
-  scale_y_continuous(limits = c(0,log10(1024*50)),breaks=c(log(1),log10(10),log10(100),log10(500),log10(1024),log10(1024*10),log10(1024*50)), labels = c('1M','10M','100M','500M','1G','10G','50G'))+
-  #scale_x_continuous(breaks=unique(df$spotnum), labels = c('100','250','500','1k','1.5k','5k','10k','15k','50k'))+
-  labs(x='Number of cells',y='Memory')+geom_hline(yintercept=log10(50*1024), linetype='dotted', col = 'red')+
-  theme_pubr()+theme(legend.position = "top")+theme(text = element_text(size=20,hjust=0.5))
-
-
+## memory plot
 ggplot(df3)+
   geom_line(aes(x=spotnum,y=memory,color=method),linewidth=3)+geom_point(aes(x=spotnum,y=memory,shape=method,fill=method),size=8)+
   scale_shape_manual(values = myshapes)+
@@ -512,18 +413,16 @@ ggplot(df3)+
     legend.key.size = unit(40, "pt")
   )
 df4$spotnum<-log10(df4$spotnum)
+
+## clock time plot
 ggplot()+
   geom_line(data=df3,aes(x=spotnum,y=time_clock,color=method),linewidth=3)+
   geom_point(data=df3,aes(x=spotnum,y=time_clock,shape=method,fill=method),size=8)+
-  #geom_line(data=df4,aes(x=spotnum,y=time_clock,color=method),linewidth=2,linetype='dotted')+
-  #geom_point(data=df4,aes(x=spotnum,y=time_clock,shape=method,fill=method),size=8)+
   scale_shape_manual(values = myshapes)+
   scale_color_manual(values = mycolor)+
   scale_fill_manual(values = mycolor)+
   geom_hline(yintercept=24*60, linetype='dashed', col = 'red',linewidth=0.5)+
   annotate("text", x = log10(700), y = 24*60, label = "1 day", size=12,vjust = -0.5)+
-  #geom_hline(yintercept=log10(60), linetype='dashed', col = 'red')+
-  #annotate("text", x = log10(700), y = 60, label = "1 hour", size=12,vjust = -1)+
   geom_hline(yintercept=48*60, linetype='dashed', col = 'red')+
   annotate("text", x = log10(700), y = 48*60, label = "2 days", size=12,vjust = 1.4)+
   geom_hline(yintercept=10, linetype='dashed', col = 'red')+
@@ -536,7 +435,7 @@ ggplot()+
   )
 
 
-
+## cpu time plot
 ggplot(df3)+
   geom_line(aes(x=spotnum,y=time_cpu,color=method),linewidth=3)+
   geom_point(aes(x=spotnum,y=time_cpu,shape=method,fill=method),size=8)+
@@ -547,8 +446,6 @@ ggplot(df3)+
   annotate("text", x = log10(750), y = log10(24*60), label = "1 day", size=12,vjust = 0.5)+
   geom_hline(yintercept=60, linetype='dashed', col = 'red')+
   annotate("text", x = log10(750), y = 60, label = "1 hour", size=12,vjust = -0.5)+
-  #geom_hline(yintercept=1, linetype='dashed', col = 'red')+
-  #annotate("text", x = log10(32000), y = 1, label = "1 min", size=12,vjust = -0.5)+
   geom_hline(yintercept=24*60*20, linetype='dashed', col = 'red')+
   annotate("text", x = log10(750), y =24*60*20, label = "20 days", size=12,vjust = -0.5)+
   geom_hline(yintercept=24*60*10, linetype='dotted', col = 'red',linewidth=0.5)+
