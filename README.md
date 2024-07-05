@@ -6,6 +6,6 @@ We include 15 SVG identification methods:
 
 3 additional general-purpose multivariate-correlation methods: RV-coefficient, distance correlation (dCor) coefficient and Hilbert Schmidt Independent Criterion (HSIC).
 
-The codes include spatially variable gene identification algorithms ("./Methods"), preprocessing processes ("./utils"), synthetic data generation ("./Simulation"), running time and memory usage records ("./Scalability"), and analysis of real data involved ("./Real analysis").
+The codes include spatially variable gene identification algorithms ("./Methods"), synthetic data generation ("./Simulation"), running time and memory usage records ("./Scalability"), and analysis of real data involved ("./Real analysis").
 
 Data description: The reference datasets for synthetic data generation are under "./Simulation/Reference", while the real-world datasets are available at https://doi.org/10.5281/zenodo.7227772 .
