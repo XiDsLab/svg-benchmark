@@ -3,7 +3,8 @@ library(parallel)
 library(dplyr)
 library(tidyverse)
 library(peakRAM)
-
+## Load data after quality control
+slideindex<-c(151507)
 load(paste0(slideindex,".RData"))
 
 ## SPARK-X
