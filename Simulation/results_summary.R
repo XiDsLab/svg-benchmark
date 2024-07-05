@@ -6,6 +6,7 @@ library(parallel)
 library(PRROC)
 setwd('result_path')
 
+## Load results of the SVG methods--------------------------------------------
 slideindex<-c("brainA")
 k=1
 methods<-c("Binspect","spark","meringue","spatialDE","SOMDE","sparkX","sepal","scGCO","RVcor","dCor","HSIC")
@@ -183,10 +184,14 @@ save(rank_Binspect,rank_spark,rank_meringue,rank_spatialDE,rank_SOMDE,rank_spark
      file = paste0(slideindex[k],"_generank.RData"))
 
 
-###########################
+## Calculate indicators based on simulated gold standards-------------------
 methods<-c("Binspect","spark","meringue","spatialDE","SOMDE","sparkX","sepal","scGCO","RV","dCor","HSIC")
 Information<-matrix(data=NA,nrow=11,ncol=10)
-#####load real svg to L
+rownames(Information)<-methods
+colnames(Information)<-c("precision","sensitivity","accuracy","similarity","F1",
+                         "num_sliver","AUPR","AUROC","EP","EPratio")
+
+#####Load true svg (in simulation) to L
 ncol(counts)
 # G<-colnames(counts)
 # hah<-sapply(1:ncol(counts), function(t){
@@ -221,8 +226,5 @@ for (tt in 1:11) {
   Information[tt,10]=length(intersect(L,tmp1))/length(tmp1)/(length(L)/length(seekindex))
 }
 
-rownames(Information)<-methods
-colnames(Information)<-c("precision","sensitivity","accuracy","similarity","F1","num_sliver","AUPR","AUROC","EP","EPratio")
 Information
 write.csv(Information,paste0(slideindex[k],"_sim.csv"))
-

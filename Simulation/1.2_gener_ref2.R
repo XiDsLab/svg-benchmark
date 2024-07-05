@@ -1,9 +1,9 @@
-## load reference data
+## load reference data------------------------------------------------------
 library(ggplot2)
 library(SRTsim)
 load('reference/reference2.RData')
 
-## Estimate model parameters for data generation
+## Estimate model parameters for data generation----------------------------
 ngen<-10000
 set.seed(1)
 counts<-t(counts)
@@ -18,7 +18,7 @@ load('sim_result.RData')
 simSRT3<-simSRT2
 gene<-rownames(counts)
 
-## Calculate indicators
+## Calculate indicators-----------------------------------------------------
 ### Kruskal-Wallis test statistic
 zhi<-c()
 counts<-t(counts)
@@ -118,7 +118,7 @@ info_gene$min_spot<-svg_pot_min
 info_gene$global_mean<-global_mean
 info_gene$KW<-KW
 
-## Filter the required SVG and non SVG based on indicators
+## Filter the required SVG and non SVG based on indicators------------------
 DE_gen<-rownames(info_gene)[which((info_gene$gener_gen==1&info_gene$max_spot>0.4&((info_gene$max_spot-info_gene$min_spot)>0.1)&info_gene$global_mean>0.01))]
 
 normal_gen_cho1<-setdiff(rownames(info_gene)[which((info_gene$gener_gen==1&info_gene$max_spot<0.4&((info_gene$max_spot-info_gene$min_spot)<0.3)&info_gene$global_mean>0.01))],DE_gen)
@@ -136,7 +136,7 @@ info_gene$final_gen[match(gen_final,rownames(info_gene))]<-1
 
 
 
-## Modify non SVG parameters to make their means equal
+## Modify non SVG parameters to make their means equal----------------------
 for (i in 1:length(normal_gene)){
   indx<-which(colnames(domain_mean)==normal_gene[i])
   domain_mean[,indx]<-rep(sample(domain_mean[which(domain_mean[,indx]>0),indx],1),length(domain))
@@ -149,7 +149,7 @@ for(i in 1:length(domain)){
 
 
 
-## Generate synthetic data with estimated parameters
+## Generate synthetic data with estimated parameters------------------------
 simSRTe <- srtsim_count(simSRT2)
 refcounts_all<-counts
 counts<-simSRTe@simCounts[match(gen_final,rownames(simSRTe@simCounts)),]

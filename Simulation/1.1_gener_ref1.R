@@ -1,9 +1,9 @@
-## load reference data
+## load reference data------------------------------------------------------
 library(ggplot2)
 library(SRTsim)
 load('reference/reference1.RData')
 
-## Estimate model parameters for data generation
+## Estimate model parameters for data generation----------------------------
 ngen<-10000
 set.seed(1)
 counts<-t(counts)
@@ -18,7 +18,7 @@ load('sim_result.RData')
 simSRT3<-simSRT2
 gene<-rownames(counts)
 
-## Calculate indicators
+## Calculate indicators-----------------------------------------------------
 ### Kruskal-Wallis test statistic
 zhi<-c()
 counts<-t(counts)
@@ -40,7 +40,7 @@ info<-as.data.frame(info)
 names(info)<-c('x','y','kind')
 domain<-as.character(unique(info$kind))
 
-### The proportion of spots in each domain to the overall spot
+### The proportion of spots in each domain to the overall spot--------------
 domain_pro<-sapply(1:length(domain), function(t){
   length(which(info$kind==domain[t]))/nrow(info)
 })
@@ -55,7 +55,7 @@ for (i in 1:length(domain)){
 nonexp_gen<-unique(nonexp_gen)
 gener_gene<-setdiff(gene,nonexp_gen)
 
-### The mean of each gene in each region
+### The mean of each gene in each region------------------------------------
 domain_mean<-matrix(0,ncol=length(gene),nrow=length(domain))
 for (i in 1:length(domain)){
   indx<-match(names(simSRT2@EstParam[[domain[i]]]@listData[["gene_sel1"]]),gene)
@@ -84,7 +84,7 @@ global_mean<-sapply(1:ncol(domain_mean),function(t){
 })
 names(global_mean)<-colnames(domain_mean)
 
-### Calculate propotion points with non zero expression in each region
+### Calculate propotion points with non zero expression in each region------
 domain_exp<-matrix(0,nrow(domain_mean),ncol(domain_mean))
 for (i in 1:length(domain)){
   indx<-which(info$kind==domain[i])
@@ -118,7 +118,7 @@ info_gene$min_spot<-svg_pot_min
 info_gene$global_mean<-global_mean
 info_gene$KW<-KW
 
-## Filter the required SVG and non SVG based on indicators
+## Filter the required SVG and non SVG based on indicators------------------
 DE_gen<-rownames(info_gene)[which(info_gene$gener_gen==1&info_gene$differ>1.5&((info_gene$max_spot-info_gene$min_spot)>0.5)&(info_gene$max_spot>0.4)&info_gene$global_mean>0.01)]
 normal_gen_cho<-setdiff(rownames(info_gene)[which((info_gene$gener_gen==1&info_gene$differ<2&((info_gene$max_spot-info_gene$min_spot)<0.5)&info_gene$global_mean>0.01)|
                                                     (info_gene$gener_gen==0&info_gene$differ<40&((info_gene$max_spot-info_gene$min_spot)<0.5)&info_gene$global_mean>0.01))],DE_gen)
@@ -143,7 +143,7 @@ for(i in 1:length(domain)){
 
 
 
-## Generate synthetic data with estimated parameters
+## Generate synthetic data with estimated parameters------------------------
 simSRTe <- srtsim_count(simSRT2)
 
 refcounts_all<-counts

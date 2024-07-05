@@ -1,3 +1,6 @@
+library(ggplot2)
+library(reticulate)
+library(ggpubr)
 method1<-c('Binspect','dCor','RV','meringue','HSIC','spark','sparkX','sepal','SOMDE','spatialDE','scGCO')
 method2<-c('Binspect','dCor','RV','meringue','HSIC','spark','sparkX','sepal','SOMDE','spatialDE','scGCO')
 method3<-c('Binspect','dCor','HSIC','sparkX','sepal','SOMDE','scGCO')
@@ -8,16 +11,14 @@ t_clock<-c()
 t_cpu<-c()
 m<-c()
 seednum<-c()
-library(ggplot2)
 
-library(reticulate)
 pd <- import("pandas")
 spotnum<-c(500,1000,2000,4000,8000,16000,32000,50000)
 seed<-c(1,2)
 
 for(i in 1:5){
   for(j in 1){
-    file<-paste0('D:/Data/xiacaiyang/',spotnum[i],'/',seed[j])
+    file<-paste0('D:/Data/downsampling/',spotnum[i],'/',seed[j])
     setwd(file)
     
     load('brainA_result_Binspect.RData')
@@ -99,12 +100,13 @@ for(i in 1:5){
     
   }
 }
+
 # result<-c()
 # result2<-c()
 # result3<-c()
 # for(i in 1:8){
 #   for(j in 1:2){
-#     file<-paste0('D:/Data/xiacaiyang/',spotnum[i],'/',seed[j])
+#     file<-paste0('D:/Data/downsampling/',spotnum[i],'/',seed[j])
 #     setwd(file)
 #     
 #     scgo<-pd$read_pickle("brainA_result_sepal.data")
@@ -117,7 +119,7 @@ for(i in 1:5){
 
 for(i in 6){
   for(j in 1){
-    file<-paste0('D:/Data/xiacaiyang/',spotnum[i],'/',seed[j])
+    file<-paste0('D:/Data/downsampling/',spotnum[i],'/',seed[j])
     setwd(file)
     
     load('brainA_result_Binspect.RData')
@@ -203,7 +205,7 @@ for(i in 6){
 
 for(i in 7){
   for(j in 1){
-    file<-paste0('D:/Data/xiacaiyang/',spotnum[i],'/',seed[j])
+    file<-paste0('D:/Data/downsampling/',spotnum[i],'/',seed[j])
     setwd(file)
     
     load('brainA_result_Binspect.RData')
@@ -286,7 +288,7 @@ for(i in 7){
 
 for(i in 8){
   for(j in 1){
-    file<-paste0('D:/Data/xiacaiyang/',spotnum[i],'/',seed[j])
+    file<-paste0('D:/Data/downsampling/',spotnum[i],'/',seed[j])
     setwd(file)
     
     load('brainA_result_Binspect.RData')
@@ -365,20 +367,21 @@ for(i in 8){
     
   }
 }
-df<-data.frame(menmory=m,method=method,time_clock=t_clock,time_cpu=t_cpu,seednum=seednum,spotnum=spotn)
+
+
+df<-data.frame(memory=m,method=method,time_clock=t_clock,time_cpu=t_cpu,seednum=seednum,spotnum=spotn)
 
 df$time_clock<-df$time_clock/60
 df$time_cpu<-df$time_cpu/60
-max(df$menmory)
-df$menmory[which(df$menmory<0)]<-1024*50+1
+max(df$memory)
+df$memory[which(df$memory<0)]<-1024*50+1
 
 
-df2<-data.frame(menmory=(df$menmory[which(df$seednum==1)]),
+df2<-data.frame(memory=(df$memory[which(df$seednum==1)]),
                 method=df$method[which(df$seednum==1)],
                 time_clock=(df$time_clock[which(df$seednum==1)]),
                 time_cpu=(df$time_cpu[which(df$seednum==1)]),
                 spotnum=df$spotnum[which(df$seednum==1)])
-library(ggpubr)
 mycolor<-c("#4da0a0","#ffbc14","#156077","#2e409a","#942d8d",
            "#00bdcd","#9999CC","#e4ce00", "#9ec417","#CC6666","#56B4E9")
 names(mycolor)<-c("Binspect","spark","meringue",
@@ -405,7 +408,6 @@ ggplot(df2)+
    
 
 df3<-df2
-##加虚线
 indx<-c(rep(c(65),each=2))
 df4<-df2[indx,]
 df4[2,3]<-48*60
@@ -467,10 +469,10 @@ ggplot(df3)+
 
 df3<-df2
 
-df3$menmory<-log10(df3$menmory)
+df3$memory<-log10(df3$memory)
 df3$spotnum<-log10(df3$spotnum)
 ggplot(df3)+
-  geom_line(aes(x=spotnum,y=menmory,color=method),linewidth=1)+geom_point(aes(x=spotnum,y=menmory,shape=method,fill=method),size=3)+
+  geom_line(aes(x=spotnum,y=memory,color=method),linewidth=1)+geom_point(aes(x=spotnum,y=memory,shape=method,fill=method),size=3)+
   scale_shape_manual(values = myshapes)+
   scale_color_manual(values = mycolor)+
   scale_fill_manual(values = mycolor)+
@@ -484,11 +486,9 @@ ggplot(df3)+
   )
 
 
-
-
 ggplot(df3)+
-  geom_line(aes(x=spotnum,y=menmory,color=method))+ 
-  geom_point(aes(x=spotnum,y=menmory,color=method),size=2)+coord_trans(x="log10")+
+  geom_line(aes(x=spotnum,y=memory,color=method))+ 
+  geom_point(aes(x=spotnum,y=memory,color=method),size=2)+coord_trans(x="log10")+
   scale_y_continuous(limits = c(0,log10(1024*50)),breaks=c(log(1),log10(10),log10(100),log10(500),log10(1024),log10(1024*10),log10(1024*50)), labels = c('1M','10M','100M','500M','1G','10G','50G'))+
   #scale_x_continuous(breaks=unique(df$spotnum), labels = c('100','250','500','1k','1.5k','5k','10k','15k','50k'))+
   labs(x='Number of cells',y='Memory')+geom_hline(yintercept=log10(50*1024), linetype='dotted', col = 'red')+
@@ -496,7 +496,7 @@ ggplot(df3)+
 
 
 ggplot(df3)+
-  geom_line(aes(x=spotnum,y=menmory,color=method),linewidth=3)+geom_point(aes(x=spotnum,y=menmory,shape=method,fill=method),size=8)+
+  geom_line(aes(x=spotnum,y=memory,color=method),linewidth=3)+geom_point(aes(x=spotnum,y=memory,shape=method,fill=method),size=8)+
   scale_shape_manual(values = myshapes)+
   scale_color_manual(values = mycolor)+
   scale_fill_manual(values = mycolor)+

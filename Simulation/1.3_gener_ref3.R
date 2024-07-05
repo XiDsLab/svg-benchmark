@@ -1,9 +1,9 @@
-## load reference data
+## load reference data------------------------------------------------------
 library(ggplot2)
 library(SRTsim)
 load('reference/reference2.RData')
 
-## Estimate model parameters for data generation
+## Estimate model parameters for data generation----------------------------
 ngen<-10000
 set.seed(1)
 counts<-t(counts)
@@ -18,7 +18,7 @@ load('sim_result.RData')
 simSRT3<-simSRT2
 gene<-rownames(counts)
 
-## Calculate indicators
+## Calculate indicators-----------------------------------------------------
 ### Kruskal-Wallis test statistic
 zhi<-c()
 counts<-t(counts)
@@ -118,7 +118,7 @@ info_gene$min_spot<-svg_pot_min
 info_gene$global_mean<-global_mean
 info_gene$KW<-KW
 
-## Filter the required SVG and non SVG based on indicators
+## Filter the required SVG and non SVG based on indicators------------------
 DE_gen<-rownames(info_gene)[which((info_gene$gener_gen==1&info_gene$differ>18&info_gene$max_spot>0.05&info_gene$global_mean>0.005)|(info_gene$gener_gen==0&info_gene$max_spot>0.05))]
 normal_gen_cho<-setdiff(rownames(info_gene)[which((info_gene$gener_gen==1&info_gene$differ<18&info_gene$global_mean>0.001)|(info_gene$gener_gen==1&info_gene$differ>18&info_gene$max_spot<0.01&info_gene$global_mean>0.005)|(info_gene$gener_gen==0&info_gene$max_spot<0.05&info_gene$max_spot>0.01))],DE_gen)
 DE_gen<-sample(DE_gen,size=de_potion*ngen,replace=FALSE)
@@ -143,7 +143,7 @@ for(i in 1:length(domain)){
 
 
 
-## Generate synthetic data with estimated parameters
+## Generate synthetic data with estimated parameters------------------------
 simSRTe <- srtsim_count(simSRT2)
 refcounts_all<-counts
 counts<-simSRTe@simCounts[match(gen_final,rownames(simSRTe@simCounts)),]
