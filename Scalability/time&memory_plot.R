@@ -1,6 +1,6 @@
 library(ggplot2)
 library(reticulate)
-use_python('D:/software/Anaconda3')
+# use_python('D:/software/Anaconda3')
 pd<- import("pandas")
 method_R<-list(c('Binspect','dCor','RV','meringue','HSIC','spark','sparkX'),
                 c('Binspect','dCor','HSIC','sparkX'),
@@ -25,7 +25,7 @@ for (i in 1:length(spotnum)){
     tmp_methodR<-method_R[[1]]
     tmp_methodpy<-method_py[[1]]
   }
-  path<-paste0('D:/Data/xiacaiyang/',spotnum[i],'/1')
+  path<-paste0('D:/Data/downsampling/',spotnum[i],'/1')
   setwd(path)
   filename<-list.files()
   r_result<-filename[grep('.RData',filename)]
@@ -51,7 +51,7 @@ for (i in 1:length(spotnum)){
       df<-rbind(df,new_row)
     }
   }
-  mem_py<-read.table('result.txt',sep=' ',header = FALSE)## Manually summarize by using .out file  
+  mem_py<-read.table('result.txt',sep=' ',header = FALSE) ## Manually summarize by using .out file  
   py_result<-filename[grep('.data',filename)]
   for (j in 1:length(tmp_methodpy)){
     tmp_method<-tmp_methodpy[j]

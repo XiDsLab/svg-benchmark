@@ -83,4 +83,8 @@ Source code: https://github.com/cran/dHSIC
 Reference to: Gretton, A., Herbrich, R., Smola, A., Bousquet, O., Scholkopf, B., & Hyvarinen, A. (2005). Kernel methods for measuring independence. *Journal of Machine Learning Research, 6(12)*.
 
 ## Dependency
-For the algorithms that specifically developed for SVG detection, the softwares we used are BinSpect (Giotto v1.0.4), SPARK (SPARK v1.1), MERINGUE (MERINGUE v1.0), SpatialDE (SpatialDE v1.1.3), SOMDE (somde v0.1.8), SPARK-X (SPARK v1.1.1), sepal (sepal v1.0.0), scGCO (scGCO v1.1.0), trendsceek (trendsceek v1.0.0), BOOST-GP (Github documentation download required), BOOST-MI (Github documentation download required), GPcounts (GPcounts v0.1). For the three general-purpose correlation methods, we use R packages FactoMineR (v2.4), Rfast (v2.0.6) and dHSIC (v2.1) to calculate the correlations RV, dCor and HSIC between spatial locations¡¯ coordinates and gene expression.
+For the algorithms that specifically developed for SVG detection, the softwares we used are 
+
+BinSpect (Giotto v1.0.4), SPARK (SPARK v1.1), MERINGUE (MERINGUE v1.0), SpatialDE (SpatialDE v1.1.3), SOMDE (somde v0.1.8), SPARK-X (SPARK v1.1.1), sepal (sepal v1.0.0), scGCO (scGCO v1.1.0), trendsceek (trendsceek v1.0.0), BOOST-GP (Github documentation download required), BOOST-MI (Github documentation download required), GPcounts (GPcounts v0.1). For the three general-purpose correlation methods, we use R packages FactoMineR (v2.4), Rfast (v2.0.6) and dHSIC (v2.1) to calculate the correlations RV, dCor and HSIC between spatial locations¡¯ coordinates and gene expression.
+
+For time and memory recording, R packages parallel==4.0.5, peakRAM==1.0.2; python package memory-profiler==0.61.0

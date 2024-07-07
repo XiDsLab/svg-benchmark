@@ -1,8 +1,10 @@
 # Simulation
 
-- 1.1 & 1.2 & 1.3 Generate synthetic data based on three reference datasets,the reference data is in 'reference' folder.
-- time&memory_plot  Organize and plot the results of time loss and memory usage.
-- results_summary Calculate statistics based on the results.
+- 1.1 & 1.2 & 1.3_gener_refX.R Generate synthetic data based on three reference datasets
+
+- reference Store reference real datasets for synthetic data generation..
+
+- results_summary.R Calculate statistics based on the results.
 
 ## Dependency
 The scripts in this repository are excuted in R (v4.3.1) and use the following R packages:
