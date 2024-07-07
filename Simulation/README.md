@@ -1,8 +1,8 @@
 # Simulation
 
-- 1.1 & 1.2 & 1.3_gener_refX.R Generate synthetic data based on three reference datasets
+- 1.1 & 1.2 & 1.3_gener_refX.R Generate synthetic data based on three reference datasets.
 
-- reference Store reference real datasets for synthetic data generation..
+- reference Store reference real datasets for synthetic data generation.
 
 - results_summary.R Calculate statistics based on the results.
 
