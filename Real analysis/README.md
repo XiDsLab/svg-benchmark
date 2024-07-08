@@ -10,9 +10,9 @@
 
 ## clustering 
 
-There are five clustering algorithms, among which BayesSpace and spaGCN are spatial clustering algorithms, while Lovain, LVM, and SLM are scRNA-seq clustering algorithms. Given the expert annotations, we tune the parameters of these five clustering methods, including the ¡°resolution¡± parameter of the scRNA-seq clustering methods, the ¡°q¡± parameter of BayesSpace, the ¡°target_num¡± parameter of SpacGCN, such that the resulting number of clusters equals to the number of clusters in the expert annotations.
+There are five clustering algorithms, among which BayesSpace and spaGCN are spatial clustering algorithms, while Lovain, LVM, and SLM are scRNA-seq clustering algorithms. Given the expert annotations, we tune the parameters of these five clustering methods, such that the resulting number of clusters equals to the number of clusters in the expert annotations.
 
-## construction_of_silver_standards
+## construction of silver standards
 - histological_signals.R Silver standards constructed by correlating with histology images. Taking the results from LABTrans.py as input, we calculate the Pearson's correlation and then obtain silver standard SVGs.
 
 - LABTrans.py Convert the RGB image data to lightness vectors through the LAB transform.
