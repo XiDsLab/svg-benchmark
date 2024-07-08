@@ -12,7 +12,7 @@ for(i in 1:2){
     ## and time to deviate from the real situation of the SVG algorithms.
     
     ## Select n spatial locations' coordinates
-    center<-which(info$x>3000&info$x<3001) # &info$y>-3001&info$y<(-3000))
+    center<-which(info$x>2000&info$x<4001&info$y>(-4001)&info$y<(-2000))
     center<-sample(center,1)
     dist<-sapply(1:nrow(counts),function(t){
       di<-sqrt((info$x[t]-info$x[center])^2+(info$y[t]-info$y[center])^2)
