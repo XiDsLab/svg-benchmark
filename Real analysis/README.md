@@ -2,7 +2,7 @@
 
 - adjacent_reproducibility.R Obtain reproducibility of SVG identification algorithms by calculating the Jaccard similarity between the top-K identified SVGs in adjacent slices of spatial transcriptomics.
 
-- generation_of_pseudo_datasets.R To estimate the type I errors of SVG identification algorithms, we generate pseudo datasets (take 10x Visium as an example) by randomly permuting each gene¡¯s expression values across the spatial locations.
+- generation_of_pseudo_datasets.R To estimate the type I errors of SVG identification algorithms, we generate pseudo datasets (take 10x Visium as an example) by randomly permuting each gene expression values across the spatial locations.
 
 - similarity_between_methods.R Obtain between-method-similarity by calculating the Jaccard similarity of the top-K genes identified by different SVG identification algorithms on real datasets.
 
@@ -24,4 +24,4 @@ There are five clustering algorithms, among which BayesSpace and spaGCN are spat
 - Wilcoxon_test.R Silver standards constructed using the Wilcoxon test. Dependency: R packages stats==4.0.5, ICSKAT==0.2.0
 
 ## stability
-- generation_of_perturbed_datasets.R To evaluate SVG methods¡¯ robustness against the ¡°spot-swapping¡± perturbation, we generate perturbed datasets (take 10x Visium as an example).
+- generation_of_perturbed_datasets.R To evaluate SVG methods¡¯ robustness against the spot-swapping perturbation, we generate perturbed datasets (take 10x Visium as an example).
