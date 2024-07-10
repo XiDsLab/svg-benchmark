@@ -76,9 +76,6 @@ df$time_cpu<-as.numeric(df$time_cpu)
 df$spotnum<-as.numeric(df$spotnum)
 df$time_clock<-df$time_clock/60
 df$time_cpu<-df$time_cpu/60
-df$time_cpu[75]<-df$time_cpu[75]/4
-df$time_clock[75]<-df$time_clock[75]/4
-
 
 df$spotnum<-log10(df$spotnum)
 library(ggpubr)
