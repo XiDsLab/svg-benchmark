@@ -1,15 +1,19 @@
 library(Seurat)
+source("../preprocess.R")
 ## Load data
 slideindex<-c(151507)
 fchar<- paste0(slideindex,".list.rds")
 data <- readRDS(fchar)
 
-## load genes after quality control (seekindex)
-load(paste0(slideindex[k],"_svg.RData"))
-counts<-as.matrix(data[["count_mat"]])[seekindex,]
+##load genes after quality control (seekindex) or perform quality control with PreProcess
+#load(paste0(slideindex[k],"_svg.RData"))
+#counts<-as.matrix(data[["count_mat"]])[seekindex,]
+tmp<-PreProcess(data=data,mat_form = T)
+counts<-as.matrix(tmp[[1]])
+seekindex<-rownames(counts)
 info<-data[["anno_coord"]]
 info<-as.data.frame(info)
-Data <- CreateSeuratObject(counts,meta.data = info)
+Data <- CreateSeuratObject(t(counts),meta.data = info)
 Data<-NormalizeData(object = Data)
 counts<-as.matrix(Data@assays[["RNA"]]@data)
 rm(Data,info)

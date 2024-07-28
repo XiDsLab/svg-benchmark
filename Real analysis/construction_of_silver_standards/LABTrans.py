@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Sat Aug  6 18:56:58 2022
-
-@author: xwchen
-"""
 
 import cv2
 import numpy as np

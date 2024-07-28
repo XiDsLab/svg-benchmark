@@ -1,14 +1,18 @@
 ## Quality control
 PreProcess <- function(data,
                        min_spots_gene = 400,
-                       min_gene_spots_r = 0.01) {
+                       min_gene_spots_r = 0.01,
+                       mat_form = F) {
   ## data should be list, and data[[1]] is counts matrix, data[[2]] is coordinate and other information
   ## min_spots_genes means that there is no less than this number of gene expression in each spot (the expression amount >0)
   ## min_gene_spots_r means that each gene is expressed in spots of no less than this proportion (the expression amount >0)
+  ## mat_form T/F: if counts matrix is spatial locations * genes, that is F;  if counts matrix is  genes * spatial locations, that is T.
   ################################################################################################
   ## load count and info
   counts <- as.matrix(data[[1]])
-  counts<-t(counts)
+  if(mat_form){
+    counts<-t(counts)
+  }
   
   info <- data.frame(x = data[[2]]$array_row,
                      y = data[[2]]$array_col)

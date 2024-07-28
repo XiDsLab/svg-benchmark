@@ -28,8 +28,8 @@ sig_genes_Binspect<-sig_genes_Binspect[order(sig_genes_Binspect$adj.p.value),]
 
 sig_genes_spark<-sig_genes_spark[order(sig_genes_spark$adjusted_pvalue),]
 sig_genes_spatialDE<-sig_genes_spatialDE[sig_genes_spatialDE$g!="log_total_count",]
-seekindex<-c(sig_genes_spatialDE["g"])
-seekindex<-seekindex[["g"]]
+#seekindex<-c(sig_genes_spatialDE["g"])
+#seekindex<-seekindex[["g"]]
 sig_genes_spatialDE<-subset(sig_genes_spatialDE,sig_genes_spatialDE$qval<0.05)
 sig_genes_spatialDE<-sig_genes_spatialDE[order(sig_genes_spatialDE$qval),]
 sig_genes_SOMDE<-sig_genes_SOMDE[sig_genes_SOMDE$g!="log_total_count",]
