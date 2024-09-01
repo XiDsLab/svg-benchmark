@@ -25,11 +25,8 @@ for (llindex in 9:11) {
 
 ## data process
 sig_genes_Binspect<-sig_genes_Binspect[order(sig_genes_Binspect$adj.p.value),]
-
 sig_genes_spark<-sig_genes_spark[order(sig_genes_spark$adjusted_pvalue),]
 sig_genes_spatialDE<-sig_genes_spatialDE[sig_genes_spatialDE$g!="log_total_count",]
-#seekindex<-c(sig_genes_spatialDE["g"])
-#seekindex<-seekindex[["g"]]
 sig_genes_spatialDE<-subset(sig_genes_spatialDE,sig_genes_spatialDE$qval<0.05)
 sig_genes_spatialDE<-sig_genes_spatialDE[order(sig_genes_spatialDE$qval),]
 sig_genes_SOMDE<-sig_genes_SOMDE[sig_genes_SOMDE$g!="log_total_count",]
@@ -42,8 +39,8 @@ x<-c(1:length(y))*0.01
 cut<-processStream(y, cpmType = "Exponential")$changePoints
 point<-y[quantile(cut, 0.9)]
 
-plot(x,y,cex=0.9)
-abline(v=quantile(cut, 0.9)*0.01,col='blue')
+#plot(x,y,cex=0.9)
+#abline(v=quantile(cut, 0.9)*0.01,col='blue')
 
 sig_genes_sepal<-subset(sig_genes_sepal,sig_genes_sepal$average>point)
 sig_genes_scGCO<-sig_genes_scGCO[,1:4]
@@ -74,7 +71,7 @@ for (n in 1:3) {
   assign(nameindex[n],x)
 }
 
-
+## seekindex including all genes after QC
 save(Binspect,spark,meringue,spatialDE,SOMDE,sparkX,sepal,scGCO,RV,dCor,HSIC,seekindex,
      file = paste0(slideindex[k],"_svg.RData"))
 
