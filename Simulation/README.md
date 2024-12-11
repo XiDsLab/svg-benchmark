@@ -1,10 +1,13 @@
 # Simulation
 
-- 1.1 & 1.2 & 1.3_gener_refX.R Generate synthetic data based on three reference datasets.
+- 1.1 & 1.2 & 1.3_generation_refX.R Generate synthetic data based on three reference datasets.
 
 - reference Store reference real datasets for synthetic data generation.
 
+- Datasets Store 30 synthetic datasets.
+
 - results_summary.R Calculate statistics based on the results.
+
 
 ## Dependency
 The scripts in this repository are excuted in R (v4.3.1) and use the following R packages:
