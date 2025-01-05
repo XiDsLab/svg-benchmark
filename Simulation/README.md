@@ -4,10 +4,9 @@
 
 - reference Store reference real datasets for synthetic data generation.
 
-- Datasets Store 30 synthetic datasets.
-
 - results_summary.R Calculate statistics based on the results.
 
+- 30 synthetic datasets is available at https://doi.org/10.5281/zenodo.7227771
 
 ## Dependency
 The scripts in this repository are excuted in R (v4.3.1) and use the following R packages:
