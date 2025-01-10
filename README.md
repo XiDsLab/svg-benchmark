@@ -8,4 +8,4 @@ We include 15 SVG identification methods:
 
 The codes include spatially variable gene identification algorithms ("./Methods"), synthetic data generation ("./Simulation"), running time and memory usage records ("./Scalability"), and analysis of real data involved ("./Real analysis").
 
-Data description: The reference datasets for synthetic data generation are under "./Simulation/Reference", while the real-world datasets are available at https://doi.org/10.5281/zenodo.7227772 .
+Data description: The reference datasets for synthetic data generation are under "./Simulation/Reference", while the synthetic datasets and the real-world datasets are available at https://doi.org/10.5281/zenodo.7227771.
